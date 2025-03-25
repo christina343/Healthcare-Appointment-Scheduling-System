@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book Appointment - Healthcare Clinic</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="hero">
+            <h1>Healthcare Clinic</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="doc.html">Doctor Listings</a></li>
+                <li><a href="bapp.html">Book Appointment</a></li>
+                <li><a href="pd.html">Patient Dashboard</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="bappoin">
+            <h2 style="text-align:center">Book an Appointment</h2>
+            <form id="appointment-form">
+                <label for="doctor">Select Doctor:</label>
+                <select id="doctor" name="doctor">
+                    <option value="Dr. John David">Dr. John David - Orthopedic Surgeon</option>
+                    <option value="Dr. Emily White">Dr. Emily White - Pediatrician</option>
+                    <option value="Dr. Mark Johnson">Dr. Mark Johnson - Cardiologist</option>
+                    <option value="Dr. Sarah Joy">Dr. Sarah Joy - Dermatologist</option>
+                    <option value="Dr. James Brown">Dr. James Brown - Neurologist</option>
+                    <option value="Dr. Lisa Green">Dr. Lisa Green - Gynecologist</option>
+                </select>
+
+                <label for="date">Appointment Date:</label>
+                <input type="date" id="date" name="date" required>
+
+                <label for="time">Appointment Time:</label>
+                <input type="time" id="time" name="time" required>
+
+                <label for="patient-name">Your Name:</label>
+                <input type="text" id="patient-name" name="name" placeholder="Enter your name" required>
+
+                <button type="submit">Book Appointment</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 Healthcare Clinic | All Rights Reserved</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

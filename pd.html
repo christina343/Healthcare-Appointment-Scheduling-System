@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Patient Dashboard - Healthcare Clinic</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="hero">
+            <h1>Healthcare Clinic</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="doc.html">Doctor Listings</a></li>
+                <li><a href="bapp.html">Book Appointment</a></li>
+                <li><a href="pd.html">Patient Dashboard</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="pdash">
+            <h2>Your Appointments</h2>
+            <ul id="appointment-list">
+                <p>No upcoming appointments.</p>
+            </ul>
+            <div id="reminder-message" style="color: grey; font-weight: bold; font-size: 18px; margin-top: 22px;background-color: #ffe6e6; text-align: center;"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 Healthcare Clinic | All Rights Reserved</p>
+    </footer>
+
+    <script>
+        function loadAppointments() {
+            let appointments = JSON.parse(localStorage.getItem("appointments")) || [];
+            const appointmentList = document.getElementById("appointment-list");
+            const reminderMessage = document.getElementById("reminder-message");
+            reminderMessage.textContent = "";
+
+            appointmentList.innerHTML = "";
+
+            if (appointments.length === 0) {
+                appointmentList.innerHTML = "<p>No upcoming appointments.</p>";
+                return;
+            }
+
+            let now = new Date();
+            appointments.forEach((appointment, index) => {
+                const appointmentDate = new Date(`${appointment.date}T${appointment.time}`);
+                const timeDiff = (appointmentDate - now) / (1000 * 60 * 60);
+                
+                const li = document.createElement("li");
+                li.innerHTML = `<strong>${appointment.patientName}</strong> has an appointment with <strong>${appointment.doctor}</strong> on <strong>${appointment.date}</strong> at <strong>${appointment.time}</strong> 
+                <button onclick="cancelAppointment(${index})">Cancel</button>`;
+                appointmentList.appendChild(li);
+
+                if (timeDiff > 0 && timeDiff <= 24) {
+                    reminderMessage.innerHTML = `<strong>Reminder:</strong> You have an appointment with <strong>${appointment.doctor}</strong> on <strong>${appointment.date}</strong> at <strong>${appointment.time}</strong>. <br><br> <strong>Please arrive at least 15 minutes early.</strong>`;
+                }
+            });
+        }
+
+        function cancelAppointment(index) {
+            let appointments = JSON.parse(localStorage.getItem("appointments")) || [];
+            appointments.splice(index, 1);
+            localStorage.setItem("appointments", JSON.stringify(appointments));
+            loadAppointments();
+        }
+
+        loadAppointments();
+    </script>
+</body>
+</html>
